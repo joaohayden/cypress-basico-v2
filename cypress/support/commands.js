@@ -29,6 +29,7 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', function(){
     cy.get('#firstName').type('João')
     cy.get('#lastName').type('Hayden')
     cy.get('#email').type('joaohayden@gmail.com')
+    cy.get('#open-text-area').type('lorem ipsum dolor sit amet')
     cy.get('button[type="submit"]').click()
-    cy.get('.sucess').should('be.visible')
+    cy.get('.success').should('be.visible')
 }) 

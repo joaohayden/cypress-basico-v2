@@ -19,6 +19,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.success').should('be.visible')
     })
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function(){
+        cy.get('#firstName').type("João")
+        cy.get('#lastName').type("Hayden")
+        cy.get('#email').type("joaohaydengmail.com")
+        cy.get('#open-text-area').type('Teste') 
         cy.get('button[type="submit"]').click()
         cy.get('.error').should('be.visible')
 
@@ -29,7 +33,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
+        cy.get('#firstName').type("João")
+        cy.get('#lastName').type("Hayden")
+        cy.get('#email').type("joaohayden@gmail.com")
         cy.get('#phone-checkbox').click()
+        cy.get('#open-text-area').type('Teste') 
         cy.get('button[type="submit"]').click()
         cy.get('.error').should('be.visible')
     })
@@ -45,8 +53,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#phone').type(phone).should('have.value',phone).clear().should('have.value','')
     })
 
-    it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
         cy.get('button[type="submit"]').click()
+        cy.get('.error').should('be.visible')
+    })
+
+    it('envia o formuário com sucesso usando um comando customizado', function(){
+        cy.fillMandatoryFieldsAndSubmit() //chama função em cypress\support\commands.js
+    })
+
+    it('utiliza cy.contains para testar botão', function(){
+        cy.contains('button','Enviar').click() //utilizou o contains pra trocar o seletor
         cy.get('.error').should('be.visible')
     })
 
