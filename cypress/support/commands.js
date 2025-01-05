@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//primeiro comando -> envia o formuário com sucesso usando um comando customizado
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', function(){
+    cy.get('#firstName').type('João')
+    cy.get('#lastName').type('Hayden')
+    cy.get('#email').type('joaohayden@gmail.com')
+    cy.get('button[type="submit"]').click()
+    cy.get('.sucess').should('be.visible')
+}) 
