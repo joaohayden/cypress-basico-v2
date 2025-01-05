@@ -67,4 +67,60 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('be.visible')
     })
 
+    it('seleciona um produto (YouTube) por seu texto', function() {
+        cy.get('#product').select('YouTube').should('have.value','youtube')//clicar em um item de um select pelo texto e confirmar pelo value
+    })
+    
+    it('seleciona um produto (Mentoria) por seu valor (value)', function(){
+        cy.get('#product').select('mentoria').should('have.value','mentoria')
+    })
+
+    it('seleciona um produto (Blog) por seu índice', function(){
+        cy.get('#product').select(1).should('have.value','blog')
+    })
+
+    it('marca o tipo de atendimento "Feedback', function(){
+        cy.get('input[type="radio"][value="feedback"]').check().should('have.value','feedback') //aqui se usou tanto radio quanto feedback, seletor mais legível
+    })
+
+    it('marca cada tipo de atendimento', function(){
+        cy.get('input[type="radio"][value="ajuda"]').check().should('be.checked','ajuda')
+        cy.get('input[type="radio"][value="elogio"]').check().should('be.checked','elogio')
+        cy.get('input[type="radio"][value="feedback"]').check().should('be.checked','feedback')
+    })
+
+    //mesmo utilizando each e wrap
+    it('marca cada tipo de atendimento', function(){
+        cy.get('input[type="radio"]').each(($radio) => {
+            cy.wrap($radio).check().should('be.checked')
+        })
+    })
+
+    it('marca ambos checkboxes, depois desmarca o último', function(){
+        cy.get('input[type="checkbox"]').check().should('be.checked').last().uncheck().should('not.be.checked')
+    })
+
+    //revisão do teste de telefone obrigatório
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
+        cy.get('#firstName').type("João")
+        cy.get('#lastName').type("Hayden")
+        cy.get('#email').type("joaohayden@gmail.com")
+        cy.get('input[type="checkbox"]').check('phone').should('be.checked')
+        cy.get('#open-text-area').type('Teste') 
+        cy.get('button[type="submit"]').click()
+        cy.get('.error').should('be.visible')
+    })
+
+    //anexos
+    it.only('seleciona um arquivo da pasta fixtures', function(){
+        cy.get('input[type="file"]#file-upload') //tipo de seletor + id -> esse ficou massa
+        .should('not.have.value')
+        .selectFile('./cypress/fixtures/example.json') //aqui adicionou o arquivo
+        .should(($input) => {
+            //console.log($input)
+            expect($input[0].files[0].name).to.equal('example.json') //verficiar dentro do array onde está o arquivo e verificar se o nome é o mesmo
+        })
+    })
+
+
 })
