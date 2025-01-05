@@ -5,8 +5,10 @@
   "main": "src/index.html",
   "scripts": {
     "cy:open": "cypress open",
+    "cy:open:mobile": "cypress run --config viewportWidth=370 viewportHeight=660",
     "test": "cypress run"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wlsf82/cypress-basico-v2.git"

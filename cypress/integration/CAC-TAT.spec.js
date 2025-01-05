@@ -112,7 +112,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     //anexos
-    it.only('seleciona um arquivo da pasta fixtures', function(){
+    it('seleciona um arquivo da pasta fixtures', function(){
         cy.get('input[type="file"]#file-upload') //tipo de seletor + id -> esse ficou massa
         .should('not.have.value')
         .selectFile('./cypress/fixtures/example.json') //aqui adicionou o arquivo
@@ -122,5 +122,33 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         })
     })
 
+    it('seleciona um arquivo simulando um drag-and-drop', function(){
+        cy.get('input[type="file"]#file-upload').should('not.have.value').selectFile('./cypress/fixtures/example.json', {action: "drag-drop"})
+        .should(($input) => {
+            expect($input[0].files[0].name).to.equal('example.json')
+        })
+    })
 
+    it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function() {
+        cy.fixture('example.json').as('sampleFile')
+        cy.get('input[type="file"]#file-upload').selectFile('@sampleFile') //@ pra selecionar o alias
+        .should(($input) => {
+            expect($input[0].files[0].name).to.equal('example.json')
+        })        
+    })
+
+    //essa é a alternativa 1 onde dá muita volta pra mexer com o attr/target/_blank
+
+    it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', function(){
+        cy.get('a[href="privacy.html"]').should('have.attr', 'target', '_blank');
+
+    }) 
+
+    //essa é a alternativa 2 utilizando o invoke
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', function(){
+        cy.get('a[href="privacy.html"]').invoke('removeAttr', 'target').click() //remove atributo e target e abre o blank na mesma pagina
+        cy.url().should('include', 'privacy.html') //valida se abriu
+    })
+    
 })
+
