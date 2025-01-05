@@ -18,8 +18,8 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 1️⃣ Clone este repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-projeto.git
-cd seu-projeto
+git clone https://github.com/joaohayden/cypress-basico-v2.git
+cd cypress-basico-v2.git
 ```
 
 2️⃣ Instale as dependências:
@@ -56,36 +56,19 @@ npm run cy:run
 npm run cy:open:mobile
 ```
 
-#### Modo Headless:
-
-```bash
-npm run cy:run:mobile
-```
-
 ---
 
 ## 🗂️ Estrutura do Projeto
 
-📁 **cypress/fixtures**: Arquivos de dados usados nos testes  
 📁 **cypress/integration**: Arquivos contendo os testes  
 📁 **cypress/support**: Comandos customizados e configurações do Cypress  
 📁 **videos/**: Vídeos gerados durante a execução dos testes em modo _headless_  
 
 ---
 
-## 💡 Dica Extra
-
-🔒 Crie uma cópia do arquivo `cypress.env.example.json` como `cypress.env.json` antes de rodar os testes.  
-Isso garante que informações sensíveis, como credenciais, não sejam versionadas!  
-
----
-
-## ❤️ Apoie Este Projeto
+## ❤️ Apoie Este Estudo
 
 🌟 **Gostou?** Deixe uma estrela neste repositório!  
 📢 **Compartilhe!** Mostre para sua rede no LinkedIn.  
 
-Criado com 💚 por [Seu Nome](https://seu-portfolio.dev)
-```
-
-Esse é o código completo em um bloco só, pronto para ser copiado no seu `README.md`.
+Criado com 💚 por [Hayden](https://github.com/joaohayden)
