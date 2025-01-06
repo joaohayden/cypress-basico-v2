@@ -165,7 +165,20 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.url().should('include', 'privacy.html') //valida se abriu
     })
 
-
-
+    //utilização do lodash com times
+    it.only('preenche os campos obrigatórios e envia o formulário, alterando name para 5 diferentes', function() {
+        const longText = 'Lorem ipsum dolor sit amet'
+        const nomes =['Anakin','Padmé','Leia','Luke','Obi-Wan']
+        Cypress._.times(nomes.length, (index)=> {
+        cy.clock()
+        cy.get('#firstName').type(nomes[index])
+        cy.get('#lastName').type("Hayden")
+        cy.get('#email').type("joaohayden@gmail.com")
+        cy.get('#open-text-area').type(longText, {delay: 0})
+        cy.get('button[type="submit"]').click()
+        cy.get('.success').should('be.visible')
+        cy.tick(3000)
+        cy.get('.success').should('not.be.visible')
+        })
+    })
 })
-
