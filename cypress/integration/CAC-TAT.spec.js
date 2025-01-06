@@ -149,6 +149,6 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('a[href="privacy.html"]').invoke('removeAttr', 'target').click() //remove atributo e target e abre o blank na mesma pagina
         cy.url().should('include', 'privacy.html') //valida se abriu
     })
-    
+
 })
 
