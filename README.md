@@ -1,6 +1,7 @@
 
 # 🌟 Automação de Testes com Cypress 🚀
 
+Projeto de exemplo para o curso Básico de Testes com Cypress - Talking About Tests
 ## 📋 Pré-requisitos
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:  
